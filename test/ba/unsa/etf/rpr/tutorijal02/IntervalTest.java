@@ -47,12 +47,12 @@ class IntervalTest {
         assertEquals("()", i.toString());
     }
 
-    /*@org.junit.jupiter.api.Test
+    @org.junit.jupiter.api.Test
     void intersect() {
         Interval i = new Interval(1.1, 2.5, true, false);
         Interval i2 = i.intersect(new Interval(2.2, 2.6, true, true));
         assertEquals("[2.2,2.5)", i2.toString());
-    }*/
+    }
 
     /*
     @org.junit.jupiter.api.Test
@@ -61,7 +61,7 @@ class IntervalTest {
         Interval i2 = new Interval(2.2, 2.6, true, true);
         Interval i3 = Interval.intersect(i, i2);
         assertEquals("[2.2,2.5)", i3.toString());
-    }
+    }*/
 
     @org.junit.jupiter.api.Test
     void equals() {
@@ -77,7 +77,7 @@ class IntervalTest {
         assertFalse(i.equals(i2));
     }
 
-    @org.junit.jupiter.api.Test
+    /*@org.junit.jupiter.api.Test
     void intersect2() {
         Interval i = new Interval(1.1, 10.5, true, false);
         Interval i2 = new Interval(2.2, 2.6, true, true);

@@ -10,7 +10,7 @@ public class Interval {
     Interval(double pocetna, double krajnja, boolean pocetnaPri, boolean krajnjaPri) {
         if (pocetna > krajnja)
             throw new IllegalArgumentException("Pocetna tacka je veca od krajnje");
-        else if (Double.compare(pocetna, krajnja) == 0 && pocetnaPri != krajnjaPri)
+        else if (pocetna == krajnja && pocetnaPri != krajnjaPri) //(Double.compare(pocetna, krajnja) == 0 && pocetnaPri != krajnjaPri)
             throw new IllegalArgumentException("Tacka pripada i ne pripada intervalu");
 
         pocetnaTacka = pocetna;
@@ -27,15 +27,15 @@ public class Interval {
     }
 
     boolean isNull() {
-        return (Double.compare(pocetnaTacka, krajnjaTacka) == 0 && !pocetnaPripada);
+        return (pocetnaTacka == krajnjaTacka && !pocetnaPripada);
     }
 
     boolean isIn(double tacka) {
         if (tacka > pocetnaTacka && tacka < krajnjaTacka) // TODO: ima li neki AND
             return true;
-        else if (Double.compare(tacka, pocetnaTacka) == 0 && pocetnaPripada)
+        else if (tacka == pocetnaTacka && pocetnaPripada) // (Double.compare(tacka, pocetnaTacka) == 0 && pocetnaPripada)
             return true;
-        else if (Double.compare(tacka, krajnjaTacka) == 0 && krajnjaPripada)
+        else if ((tacka == krajnjaTacka && krajnjaPripada)) //(Double.compare(tacka, krajnjaTacka) == 0 && krajnjaPripada)
             return true;
         else
             return false;
@@ -73,7 +73,7 @@ public class Interval {
         {
             pocetnaTacka = drugi.pocetnaTacka;
             pocetnaPripada = drugi.pocetnaPripada;
-        } else if (Double.compare(prvi.pocetnaTacka, drugi.pocetnaTacka) == 1)
+        } else if (prvi.pocetnaTacka == drugi.pocetnaTacka)
         {
             pocetnaTacka = prvi.pocetnaTacka;
             pocetnaPripada = prvi.pocetnaPripada;
@@ -89,7 +89,7 @@ public class Interval {
         {
             krajnjaTacka = prvi.krajnjaTacka;
             krajnjaPripada = prvi.krajnjaPripada;
-        } else if (Double.compare(prvi.krajnjaTacka, drugi.krajnjaTacka) == 1)
+        } else if (prvi.krajnjaTacka == drugi.krajnjaTacka)
         {
             krajnjaTacka = drugi.krajnjaTacka;
             krajnjaPripada = drugi.krajnjaPripada;
@@ -98,6 +98,15 @@ public class Interval {
             krajnjaTacka = prvi.krajnjaTacka;
             krajnjaPripada = prvi.krajnjaPripada && drugi.krajnjaPripada;
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Interval))
+            throw new IllegalArgumentException("Argument nije interval");
+        Interval i = (Interval) other;
+        return (this.pocetnaTacka == i.pocetnaTacka && this.pocetnaPripada == i.pocetnaPripada &&
+                this.krajnjaTacka == i.krajnjaTacka && this.krajnjaPripada == i.krajnjaPripada);
     }
 
     @Override

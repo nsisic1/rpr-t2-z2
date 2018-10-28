@@ -26,7 +26,25 @@ public class Interval {
         krajnjaPripada = false;
     }
 
+    boolean isNull() {
+        return (Double.compare(pocetnaTacka, krajnjaTacka) == 0 && !pocetnaPripada);
+    }
+
+    boolean isIn(double tacka) {
+        if (tacka > pocetnaTacka && tacka < krajnjaTacka)
+            return true;
+        else if (Double.compare(tacka, pocetnaTacka) == 0 && pocetnaPripada)
+            return true;
+        else if (Double.compare(tacka, krajnjaTacka) == 0 && krajnjaPripada)
+            return true;
+        else
+            return false;
+        // TODO: zapisati simplifikaciju u algos
+    }
+
     
+
+
 
 
 }

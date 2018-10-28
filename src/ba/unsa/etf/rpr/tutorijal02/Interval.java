@@ -10,7 +10,7 @@ public class Interval {
     Interval(double pocetna, double krajnja, boolean pocetnaPri, boolean krajnjaPri) {
         if (pocetna > krajnja)
             throw new IllegalArgumentException("Pocetna tacka je veca od krajnje");
-        else if (pocetna == krajnja && pocetnaPri != krajnjaPri) //(Double.compare(pocetna, krajnja) == 0 && pocetnaPri != krajnjaPri)
+        else if (pocetna == krajnja && pocetnaPri != krajnjaPri)
             throw new IllegalArgumentException("Tacka pripada i ne pripada intervalu");
 
         pocetnaTacka = pocetna;
@@ -31,20 +31,19 @@ public class Interval {
     }
 
     boolean isIn(double tacka) {
-        if (tacka > pocetnaTacka && tacka < krajnjaTacka) // TODO: ima li neki AND
+        if (tacka > pocetnaTacka && tacka < krajnjaTacka)
             return true;
-        else if (tacka == pocetnaTacka && pocetnaPripada) // (Double.compare(tacka, pocetnaTacka) == 0 && pocetnaPripada)
+        else if (tacka == pocetnaTacka && pocetnaPripada)
             return true;
-        else if ((tacka == krajnjaTacka && krajnjaPripada)) //(Double.compare(tacka, krajnjaTacka) == 0 && krajnjaPripada)
+        else if ((tacka == krajnjaTacka && krajnjaPripada))
             return true;
         else
             return false;
-        // TODO: zapisati simplifikaciju u algos
     }
 
-    Interval intersect(Interval drugiInter) { // TODO kako passati parametar
+    Interval intersect(Interval drugiInter) {
 
-        // U slucaju intervala koji se ne preklapaju (i null intervala) vratiti null interval
+        // U slucaju intervala koji se ne preklapaju (i null intervala) vratice se null interval
         if ((this.isNull() || drugiInter.isNull()) ||
             (this.pocetnaTacka > drugiInter.krajnjaTacka || this.krajnjaTacka < drugiInter.pocetnaTacka)) {
             return new Interval();
@@ -89,7 +88,7 @@ public class Interval {
         {
             krajnjaTacka = prvi.krajnjaTacka;
             krajnjaPripada = prvi.krajnjaPripada;
-        } else if (prvi.krajnjaTacka == drugi.krajnjaTacka)
+        } else if (prvi.krajnjaTacka > drugi.krajnjaTacka)
         {
             krajnjaTacka = drugi.krajnjaTacka;
             krajnjaPripada = drugi.krajnjaPripada;
@@ -98,6 +97,10 @@ public class Interval {
             krajnjaTacka = prvi.krajnjaTacka;
             krajnjaPripada = prvi.krajnjaPripada && drugi.krajnjaPripada;
         }
+    }
+
+    static Interval intersect(Interval prvi, Interval drugi) {
+        return prvi.intersect(drugi);
     }
 
     @Override

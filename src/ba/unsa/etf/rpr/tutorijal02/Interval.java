@@ -100,6 +100,7 @@ public class Interval {
         }
     }
 
+    @Override
     public String toString() {
         if (this.isNull())
             return "()";

@@ -19,6 +19,13 @@ public class Interval {
         krajnjaPripada = krajnjaPri;
     }
 
+    Interval() {
+        pocetnaTacka = 0;
+        pocetnaPripada = false;
+        krajnjaTacka = 0;
+        krajnjaPripada = false;
+    }
+
     
 
 
